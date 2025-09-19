@@ -1,6 +1,6 @@
 // src/screens/LoginScreen.tsx
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -10,9 +10,28 @@ import {
   KeyboardAvoidingView,
   Platform,
   Image, 
+  Alert,
 } from 'react-native';
 
 const LoginScreen = () => {
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const handleLogin = () => {
+    if (email === '' || password === '') {
+      Alert.alert('Erro', 'Por favor, preencha o e-mail e a senha.');
+      return; 
+    }
+ 
+
+  console.log('--- Tentativa de Login ---');
+  console.log('Email digitado:', email);
+  console.log('Senha digitada:', password);
+  Alert.alert('Sucesso!', `Você tentou entrar com o email: ${email}`);
+};
+
+
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -32,6 +51,8 @@ const LoginScreen = () => {
         placeholder="Seu e-mail"
         keyboardType="email-address"
         autoCapitalize="none"
+        value={email}
+        onChangeText={setEmail}
       />
 
       {/* Campo de Senha */}
@@ -39,10 +60,12 @@ const LoginScreen = () => {
         style={styles.input}
         placeholder="Sua senha"
         secureTextEntry={true}
+        value={password}
+        onChangeText={setPassword}
       />
 
       {/* Botão de Entrar */}
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Entrar</Text>
       </TouchableOpacity>
 
@@ -55,12 +78,12 @@ const LoginScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  // NOVO: Estilo para a logo
+ 
   logo: {
-    width: 300, // Largura da imagem
-    height: 300, // Altura da imagem
-    resizeMode: 'contain', // Garante que a imagem caiba no espaço sem distorcer
-    marginBottom: 10 // Espaço entre a logo e o título
+    width: 300, 
+    height: 300, 
+    resizeMode: 'contain', 
+    marginBottom: 10 
   },
   container: {
     flex: 1,

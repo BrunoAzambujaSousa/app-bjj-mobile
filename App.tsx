@@ -2,6 +2,8 @@
 
 import React from 'react';
 import LoginScreen from './src/screens/LoginScreen';
+// App.tsx
+import './src/config/firebaseConfig'; // Importa a configuração para inicializar o Firebase
 
 // 1. Importamos as ferramentas necessárias
 import { useFonts } from 'expo-font';
